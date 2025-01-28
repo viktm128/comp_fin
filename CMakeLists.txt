@@ -4,7 +4,9 @@ project(ieor_4732)
 set(CMAKE_CXX_STANDARD 11)
 
 add_executable(ieor_4732 main.cpp
-        option.h
-        option.cpp
         european.h
-        european.cpp)
+        european.cpp
+        integral.cpp
+        integral.h
+        asset_models.h
+        asset_models.cpp)

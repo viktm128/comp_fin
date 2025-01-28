@@ -15,6 +15,7 @@ std::vector<double> European::payoffs(std::vector<double> &Xt) {
 }
 
 
+
 EuropeanCall::EuropeanCall(const double strike, const double maturity)
     : European(strike, maturity) {}
 

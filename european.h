@@ -3,7 +3,6 @@
 //
 #pragma once
 #include<vector>
-#include "option.h"
 
 #ifndef EUROPEAN_H
 #define EUROPEAN_H
