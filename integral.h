@@ -6,7 +6,7 @@
 #define INTEGRAL_H
 
 template <typename T>
-T trapezoid(std::vector<T> x,std::vector<T> f) {
+T trapezoid(std::vector<double> x,std::vector<T> f) {
     T sum = 0;
     for (int i = 1; i < x.size(); i++) {
         sum += (x[i] - x[i - 1]) * (f[i] + f[i - 1]) / 2;
@@ -15,15 +15,15 @@ T trapezoid(std::vector<T> x,std::vector<T> f) {
 }
 
 template <typename T>
-T simpson(std::vector<T> x, std::vector<T> f) {
+T simpson(std::vector<double> x, std::vector<T> f) {
     // REQUIRES x to be equally spaced and n odd;
     size_t n = x.size();
-    T h = x[1] - x[0];
+    double h = x[1] - x[0];
     T sum = 0;
     for (int i = 0; i < n; i++) {
         if (i == 0 || i == x.size() - 1) sum += f[i];
-        else if (i % 2 == 0) sum += 2 * f[i];
-        else sum += 4 * f[i];
+        else if (i % 2 == 0) sum += 2.0 * f[i];
+        else sum += 4.0 * f[i];
     }
     return 1.0/3.0 * h * sum;
 }

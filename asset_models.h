@@ -13,9 +13,10 @@ class GBM {
 public:
     GBM(double curr_price, double rate, double dividend_yield, double sig, double maturity);
     vector<double> pdf(vector<double> &ST);
-    vector<complex<double> > char_func(vector<double> &nu);
+    vector<complex<double> > psi(vector<double> &nu, double alpha, double C);
     double BSMCall(double K);
     double BSMPut(double K);
+    double get_discount();
 private:
     double S0;
     double r;

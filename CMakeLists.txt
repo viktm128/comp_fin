@@ -9,4 +9,6 @@ add_executable(ieor_4732 main.cpp
         integral.cpp
         integral.h
         asset_models.h
-        asset_models.cpp)
+        asset_models.cpp
+        fast_fourier.h
+        fast_fourier.cpp)

@@ -24,16 +24,18 @@ vector<double> GBM::pdf(vector<double> &ST) {
 }
 
 
-vector<complex<double> > GBM::char_func(vector<double> &nu) {
+vector<complex<double> > GBM::psi(vector<double> &nu, double alpha, double C) {
     vector<complex<double> > vals(nu.size());
     for (int i = 0; i < nu.size(); i++) {
-        vals[i] = exp(
-            complex<double>(
-                -pow(vol, 2) * pow(nu[i], 2) * T / 2.0, // real part
-                (log(S0) + (r - q - pow(vol, 2) / 2.0) * T) * nu[i]) // complex part
-                );
+        complex<double> in(nu[i], -(1 + alpha));
+        vals[i] = exp(-pow(vol, 2) * pow(in, 2) * T / 2.0 + complex<double>(0, 1) * ((log(S0) + (r - q - pow(vol, 2) / 2.0) * T) * in));
+        vals[i] *= C / complex<double>(alpha, nu[i]) / complex<double>(alpha + 1.0, nu[i]);
     }
     return vals;
+}
+
+double GBM::get_discount() {
+    return exp(-r * T);
 }
 
 
