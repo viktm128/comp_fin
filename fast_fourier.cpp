@@ -7,11 +7,12 @@
 #include <vector>
 #include <cmath>
 
+// TODO: choose better way to adjust ft hyper parameters
 
-double ft_call(GBM model, double k) {
-    double B = 200;
-    double a = 0.5;
-    int N = 2048;
+double ft_call(EquityModel &model, double k) {
+    double B = 250.0;
+    double a = 2.0;
+    int N = 4096;
 
     vector<double> nu = range(0.0, B, N);
     vector<complex<double> > integrand = model.psi(nu, a, model.get_discount());
@@ -22,7 +23,7 @@ double ft_call(GBM model, double k) {
 
 }
 
-double ft_put(GBM model, double k) {
+double ft_put(EquityModel &model, double k) {
     double B = 200;
     double a = -2;
     int N = 2048;

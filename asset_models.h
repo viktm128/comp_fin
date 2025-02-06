@@ -9,20 +9,40 @@
 #include <complex>
 using namespace std;
 
-class GBM {
+class EquityModel {
 public:
-    GBM(double curr_price, double rate, double dividend_yield, double sig, double maturity);
-    vector<double> pdf(vector<double> &ST);
-    vector<complex<double> > psi(vector<double> &nu, double alpha, double C);
-    double BSMCall(double K);
-    double BSMPut(double K);
+    EquityModel(double spot, double rate, double div, double time);
     double get_discount();
-private:
+    virtual ~EquityModel();
+    virtual vector<complex<double> > psi(vector<double> &nu, double alpha, double C) = 0;
+protected:
     double S0;
     double r;
     double q;
-    double vol;
     double T;
+};
+
+class Heston : public EquityModel {
+public:
+    Heston(double spot, double rate, double div, double time, double vol_init, double vol_of_vol, double corr, double vol_mean, double vol_speed);
+    vector<complex<double> > psi(vector<double> &nu, double alpha, double C) override;
+private:
+    double kappa;
+    double theta;
+    double rho;
+    double sig;
+    double v0;
+};
+
+class GBM : public EquityModel {
+public:
+    GBM(double curr_price, double rate, double dividend_yield, double maturity, double sig);
+    vector<double> pdf(vector<double> &ST);
+    vector<complex<double> > psi(vector<double> &nu, double alpha, double C) override;
+    double BSMCall(double K);
+    double BSMPut(double K);
+private:
+    double vol;
 };
 
 
